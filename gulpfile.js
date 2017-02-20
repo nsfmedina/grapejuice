@@ -40,8 +40,7 @@ gulp.task('images', function(){
 
 // Javascript
 gulp.task('scripts', function(){
-	return gulp.src('src/js/script.js')
-		.pipe(juice.concat('main.js'))
+	return gulp.src('src/js/main.js')
 		.pipe(gulp.dest('dist/js/'))
 });
 
@@ -71,7 +70,7 @@ gulp.task('browsersync', function(){
 
 	gulp.watch('src/scss/**/*.scss', ['styles']);
 	gulp.watch('src/**/*.html', ['html']);
-	gulp.watch('src/js/script.js', ['scripts']);
+	gulp.watch('src/js/main.js', ['scripts']);
 	gulp.watch('src/images/**/*', ['images']);
 	gulp.watch('src/vendor/**/*', ['vendor']);
 
