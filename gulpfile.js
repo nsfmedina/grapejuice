@@ -1,85 +1,62 @@
-console.log('Making some grapejuice! 🍇 🍇 🍇 🍷 🍷');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const pixrem = require('pixrem');
+const autoprefixer = require('autoprefixer');
+const concat = require('gulp-concat');
+const browserify = require('gulp-browserify');
+const babel = require('gulp-babel');
+const bs = require('browser-sync');
+const order = require('run-sequence');
 
-// Gulp Requirements
-var gulp = require('gulp'),
-juice = {
-	bs : require('browser-sync'),
-	concat : require('gulp-concat'),
-	imagemin : require('gulp-imagemin'),
-	merge : require('merge-stream'),
-	postcss : {
-		init : require('gulp-postcss'),
-		autoprefixer : require('autoprefixer')
-	},
-	sass : require('gulp-sass'),
-	order : require('run-sequence'),
-};
+const processlog = input => { console.log(`-=-=-=-=-=-=-=-=-=-=-=---> ${input}`) }
 
-// Soooooo...
-// The tasks are actually pretty simple
-
-// Styles
-gulp.task('styles', function(){
-	return gulp.src('src/scss/style.scss')
-	.pipe(juice.sass({outputStyle: 'expanded'}).on('error', juice.sass.logError))
-	.pipe(juice.postcss.init([
-		juice.postcss.autoprefixer({
-			browsers: ['last 5 versions']
-		})
-	]))
-	.pipe(juice.concat('main.css'))
-	.pipe(gulp.dest('dist/css/'))
+gulp.task('styles', () => {
+    processlog('styles going!');
+    return gulp.src('src/scss/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([
+            autoprefixer({
+                browsers: ['last 5 versions']
+            }),
+            pixrem()
+        ])).pipe(concat('app.css'))
+        .pipe(gulp.dest('dist/css'));
 });
 
-// Images
-gulp.task('images', function(){
-	return gulp.src('src/images/**/*')
-		.pipe(juice.imagemin())
-		.pipe(gulp.dest('dist/images/'))
+gulp.task('scripts', () => {
+    processlog('taskrunning scripts');
+    return gulp.src('src/js/app.js')
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(browserify())
+        .pipe(concat('bundle.js'))
+        .pipe(gulp.dest('dist/js'))
 });
 
-// Javascript
-gulp.task('scripts', function(){
-	return gulp.src('src/js/main.js')
-		.pipe(gulp.dest('dist/js/'))
+gulp.task('assets', () => {
+    processlog('Moving assets!');
+    return gulp.src('src/assets/**/*')
+        .pipe(gulp.dest('dist/assets'));
 });
 
-// HTML
-gulp.task('html', function(){
-	return gulp.src('src/**/*.html')
-		.pipe(gulp.dest('dist/'))
+gulp.task('sync', () => {
+    processlog('Serving files!');
+    bs.init({
+        server : {
+            baseDir: './'
+        }
+    });
+
+    gulp.watch('src/scss/**/*.scss', ['styles']);
+    gulp.watch('src/js/**/*.js', ['scripts']);
+    gulp.watch('src/assets/**/*', ['assets']);
+
+    gulp.watch('dist/**/*').on('change', bs.reload);
+    gulp.watch('*.html').on('change', bs.reload);
 });
 
-gulp.task('vendor', function(){
-	var js =  gulp.src(['src/vendor/js/jquery.min.js', 'src/vendor/js/**/*.js'])
-			 	  .pipe(juice.concat('vendor.js'))
-				  .pipe(gulp.dest('dist/js/'));
-	var css = gulp.src('src/vendor/css/*.css')
-				  .pipe(juice.concat('vendor.css'))
-				  .pipe(gulp.dest('dist/css/'));
-
-	return juice.merge(js, css);
-});
-
-gulp.task('browsersync', function(){
-	juice.bs.init({
-		server : {
-			baseDir: 'dist/'
-		}
-	});
-
-	gulp.watch('src/scss/**/*.scss', ['styles']);
-	gulp.watch('src/**/*.html', ['html']);
-	gulp.watch('src/js/main.js', ['scripts']);
-	gulp.watch('src/images/**/*', ['images']);
-	gulp.watch('src/vendor/**/*', ['vendor']);
-
-	gulp.watch('dist/**/*').on('change', juice.bs.reload);
-});
-
-// Default
-gulp.task('default', function(){
-	juice.order(['html', 'styles', 'images', 'scripts', 'vendor'], 'browsersync', function(){
-		console.log('Ready! There you go! 🍹');
-	});
-});
+gulp.task('default', order(['styles', 'scripts', 'assets'], 'sync', function(){
+    console.log('There you go :)');
+}));
