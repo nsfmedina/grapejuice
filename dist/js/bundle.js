@@ -4466,13 +4466,16 @@ return hooks;
 },{}],2:[function(require,module,exports){
 'use strict';
 
+// Install NPM modules and call them via require();
 var moment = require('moment');
 
+// Build app like you normally would;
 (function () {
     var app = {
         init: function init() {
             console.log('initing');
-            document.querySelector('.container').innerHTML = 'Welcome!!';
+            document.querySelector('.page__title').innerHTML = 'Grapejuice!';
+            document.querySelector('.page__description').innerHTML = 'It\'s ready to go! :)';
         }
     };
 

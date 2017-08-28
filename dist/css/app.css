@@ -1,5 +1,162 @@
-/* CSS */
+@-webkit-keyframes flip {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); }
+  100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); } }
+
+@keyframes flip {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); }
+  100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); } }
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #555;
-  color: #fff; }
+  margin: 0;
+  background-color: #421C52; }
+
+#page-wrapper h1, #page-wrapper h2, #page-wrapper p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  padding: 1em 20px;
+  color: #fff;
+  margin: 0; }
+
+#page-wrapper h1 {
+  font-size: 42px;
+  background-color: #522C62; }
+
+#page-wrapper h2 {
+  font-size: 28px;
+  font-weight: normal; }
+
+#page-wrapper p {
+  font-weight: normal;
+  font-size: 14px; }
+
+.animation-container {
+  font-size: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0; }
+  .animation-container:hover span {
+    padding: 90px 0; }
+  .animation-container:active span {
+    padding: 120px 0;
+    opacity: .9; }
+  .animation-container span {
+    display: inline-block;
+    width: 4%;
+    padding: 45px 0;
+    background-color: red;
+    -webkit-box-shadow: inset 2px 0 2px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 2px 0 2px rgba(0, 0, 0, 0.1);
+    -webkit-transition: .2s ease;
+    -o-transition: .2s ease;
+    transition: .2s ease;
+    -webkit-animation: flip 1s cubic-bezier(0.79, 0.05, 0.58, 1) 0s infinite alternate both;
+            animation: flip 1s cubic-bezier(0.79, 0.05, 0.58, 1) 0s infinite alternate both; }
+    .animation-container span:nth-child(25n+1) {
+      background-color: rgba(149, 117, 205, 0.05);
+      -webkit-animation-delay: 0.05s;
+              animation-delay: 0.05s; }
+    .animation-container span:nth-child(25n+2) {
+      background-color: rgba(149, 117, 205, 0.1);
+      -webkit-animation-delay: 0.1s;
+              animation-delay: 0.1s; }
+    .animation-container span:nth-child(25n+3) {
+      background-color: rgba(149, 117, 205, 0.15);
+      -webkit-animation-delay: 0.15s;
+              animation-delay: 0.15s; }
+    .animation-container span:nth-child(25n+4) {
+      background-color: rgba(149, 117, 205, 0.2);
+      -webkit-animation-delay: 0.2s;
+              animation-delay: 0.2s; }
+    .animation-container span:nth-child(25n+5) {
+      background-color: rgba(149, 117, 205, 0.25);
+      -webkit-animation-delay: 0.25s;
+              animation-delay: 0.25s; }
+    .animation-container span:nth-child(25n+6) {
+      background-color: rgba(149, 117, 205, 0.3);
+      -webkit-animation-delay: 0.3s;
+              animation-delay: 0.3s; }
+    .animation-container span:nth-child(25n+7) {
+      background-color: rgba(149, 117, 205, 0.35);
+      -webkit-animation-delay: 0.35s;
+              animation-delay: 0.35s; }
+    .animation-container span:nth-child(25n+8) {
+      background-color: rgba(149, 117, 205, 0.4);
+      -webkit-animation-delay: 0.4s;
+              animation-delay: 0.4s; }
+    .animation-container span:nth-child(25n+9) {
+      background-color: rgba(149, 117, 205, 0.45);
+      -webkit-animation-delay: 0.45s;
+              animation-delay: 0.45s; }
+    .animation-container span:nth-child(25n+10) {
+      background-color: rgba(149, 117, 205, 0.5);
+      -webkit-animation-delay: 0.5s;
+              animation-delay: 0.5s; }
+    .animation-container span:nth-child(25n+11) {
+      background-color: rgba(149, 117, 205, 0.55);
+      -webkit-animation-delay: 0.55s;
+              animation-delay: 0.55s; }
+    .animation-container span:nth-child(25n+12) {
+      background-color: rgba(149, 117, 205, 0.6);
+      -webkit-animation-delay: 0.6s;
+              animation-delay: 0.6s; }
+    .animation-container span:nth-child(25n+13) {
+      background-color: rgba(149, 117, 205, 0.65);
+      -webkit-animation-delay: 0.65s;
+              animation-delay: 0.65s; }
+    .animation-container span:nth-child(25n+14) {
+      background-color: rgba(149, 117, 205, 0.7);
+      -webkit-animation-delay: 0.7s;
+              animation-delay: 0.7s; }
+    .animation-container span:nth-child(25n+15) {
+      background-color: rgba(149, 117, 205, 0.75);
+      -webkit-animation-delay: 0.75s;
+              animation-delay: 0.75s; }
+    .animation-container span:nth-child(25n+16) {
+      background-color: rgba(149, 117, 205, 0.8);
+      -webkit-animation-delay: 0.8s;
+              animation-delay: 0.8s; }
+    .animation-container span:nth-child(25n+17) {
+      background-color: rgba(149, 117, 205, 0.85);
+      -webkit-animation-delay: 0.85s;
+              animation-delay: 0.85s; }
+    .animation-container span:nth-child(25n+18) {
+      background-color: rgba(149, 117, 205, 0.9);
+      -webkit-animation-delay: 0.9s;
+              animation-delay: 0.9s; }
+    .animation-container span:nth-child(25n+19) {
+      background-color: rgba(149, 117, 205, 0.95);
+      -webkit-animation-delay: 0.95s;
+              animation-delay: 0.95s; }
+    .animation-container span:nth-child(25n+20) {
+      background-color: #9575cd;
+      -webkit-animation-delay: 1s;
+              animation-delay: 1s; }
+    .animation-container span:nth-child(25n+21) {
+      background-color: #9575cd;
+      -webkit-animation-delay: 1.05s;
+              animation-delay: 1.05s; }
+    .animation-container span:nth-child(25n+22) {
+      background-color: #9575cd;
+      -webkit-animation-delay: 1.1s;
+              animation-delay: 1.1s; }
+    .animation-container span:nth-child(25n+23) {
+      background-color: #9575cd;
+      -webkit-animation-delay: 1.15s;
+              animation-delay: 1.15s; }
+    .animation-container span:nth-child(25n+24) {
+      background-color: #9575cd;
+      -webkit-animation-delay: 1.2s;
+              animation-delay: 1.2s; }
+    .animation-container span:nth-child(25n+25) {
+      background-color: #9575cd;
+      -webkit-animation-delay: 1.25s;
+              animation-delay: 1.25s; }
