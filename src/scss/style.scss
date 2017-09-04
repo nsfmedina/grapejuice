@@ -57,14 +57,23 @@ body {
 		display: inline-block;
 		width: 4%;
 		padding: 45px 0;
-		background-color: red;
 		box-shadow: inset 2px 0 2px rgba(0,0,0,.1);
-		transition: .2s ease;
-		animation: flip 1s cubic-bezier(0.79, 0.05, 0.58, 1) 0s infinite alternate both; 
+		transition: .2s ease padding;
+		animation: flip 1s cubic-bezier(0.79, 0.05, 0.58, 1) 0s infinite alternate both;
+		@media (max-width:768px){
+			width: 6.666%;
+		}
 		@for $i from 1 through 25 {
 			&:nth-child(25n+#{$i}){
 				background-color: rgba(#9575CD, $i * .05);
 				animation-delay: 0.05s * $i;
+				@media (max-width:768px){
+					@if ($i > 15){
+						position: absolute;
+						visibility: hidden;
+						transition: 0;
+					}
+				}
 			}
 		}
 	}
