@@ -24,6 +24,20 @@ gulp.task('styles', () => {
         .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('es5main', () => {
+    processlog('es5? god have mercy on your soul');
+    return gulp.src('src/js/app.js')
+        .pipe(concat('bundle.js'))
+        .pipe(gulp.dest('dist/js'))
+});
+
+gulp.task('es5vendor', () => {
+    processlog('vendoring');
+    return gulp.src('src/js/lib/**/*.js')
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('dist/js'))
+});
+
 gulp.task('scripts', () => {
     processlog('taskrunning scripts');
     return gulp.src('src/js/app.js')
@@ -41,7 +55,7 @@ gulp.task('assets', () => {
         .pipe(gulp.dest('dist/assets'));
 });
 
-gulp.task('sync', () => {
+gulp.task('bsync', () => {
     processlog('Serving files!');
     bs.init({
         server : {
@@ -57,6 +71,10 @@ gulp.task('sync', () => {
     gulp.watch('*.html').on('change', bs.reload);
 });
 
-gulp.task('default', order(['styles', 'scripts', 'assets'], 'sync', function(){
+gulp.task('next', order(['styles', 'scripts', 'assets'], 'bsync', function(){
     console.log('There you go :)');
+}));
+
+gulp.task('default', order(['styles', 'es5main', 'es5vendor', 'assets'], 'bsync', function(){
+    console.log('There you went :)');
 }));
